@@ -1,8 +1,10 @@
 const express = require('express');
-
 const mongoose = require('mongoose');
+require('dotenv').config();
+
 const app = express();
 
+// Routers
 const courseRouter = require('./routes/course');
 const userRouter = require('./routes/user');
 const adminRouter = require('./routes/admin');
@@ -24,14 +26,20 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-// ✅ Wrap mongoose.connect in an async function
+// Global error handler
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  res.status(status).json({ error: message });
+});
+
+// ✅ MongoDB connection
 async function main() {
   try {
-    await mongoose.connect(
-        'mongodb+srv://abhinav:abhinavdwivedi@cluster0.uu44skr.mongodb.net/coursa?appName=Cluster0'
+    const mongoUri = process.env.MONGO_URI;
+    if (!mongoUri) throw new Error("MONGO_URI not defined in .env");
 
-    );
-
+    await mongoose.connect(mongoUri);
     console.log('MongoDB connected successfully');
 
     app.listen(3005, () => {
@@ -43,23 +51,4 @@ async function main() {
   }
 }
 
-
-
-
 main();
-
-app.get('/example', async (req, res, next) => {
-  try {
-    const data = await getData();
-    res.json(data);
-  } catch (err) {
-    next(err); // Passes error to Express error handler
-  }
-});
-
-// Global error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-
