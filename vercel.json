@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "functions": {
+    "api/[...all].js": {
+      "runtime": "nodejs20.x"
+    },
+    "api/index.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
+}

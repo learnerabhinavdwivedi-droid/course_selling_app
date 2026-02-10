@@ -1,0 +1,42 @@
+const express = require('express');
+const morgan = require('morgan');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./docs/swagger');
+const { notFound, errorHandler } = require('./middleware/errorHandler');
+
+const authRoutes = require('./routes/auth.routes');
+const courseRoutes = require('./routes/course.routes');
+const userRoutes = require('./routes/user.routes');
+const enrollmentRoutes = require('./routes/enrollment.routes');
+const paymentRoutes = require('./routes/payment.routes');
+
+const path = require('path');
+const connectDB = require('./config/db');
+
+const app = express();
+
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+app.get('/healthz', async (req, res) => {
+  const dbState = connectDB.getDBState();
+  const statusCode = dbState.status === 'connected' ? 200 : 503;
+
+  return res.status(statusCode).json({
+    status: statusCode === 200 ? 'ok' : 'degraded',
+    db: dbState
+  });
+});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/courses', courseRoutes);
+app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/enrollments', enrollmentRoutes);
+app.use('/api/v1/payments', paymentRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
+
+module.exports = app;

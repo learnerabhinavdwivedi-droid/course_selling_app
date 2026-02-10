@@ -1,19 +1,36 @@
 {
   "name": "course-selling",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "Udemy-like course platform backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "node index.js",
+    "lint": "node --check index.js src/**/*.js"
   },
-  "keywords": [],
+  "keywords": ["express", "mongodb", "jwt", "stripe", "swagger"],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.7.0",
+    "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "mongoose": "^9.1.6"
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.1.6",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "node-cache": "^5.1.2",
+    "nodemailer": "^7.0.10",
+    "stripe": "^19.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
