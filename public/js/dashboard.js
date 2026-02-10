@@ -1,21 +1,3 @@
-function getApiBaseUrl() {
-  const metaValue = document.querySelector('meta[name="api-base-url"]')?.content?.trim();
-  const localValue = localStorage.getItem('apiBaseUrl')?.trim();
-  if (metaValue) return metaValue;
-  if (localValue) return localValue;
-
-  const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-  if (isLocalhost && window.location.port !== '3005') {
-    return `http://${window.location.hostname}:3005`;
-  }
-
-  return '';
-}
-
-function withApiBase(path) {
-  return `${getApiBaseUrl()}${path}`;
-}
-
 const enrolledCourses = [
   { title: 'The Complete Full-Stack Web Bootcamp', instructor: 'Angela M.', progress: 62 },
   { title: 'Practical Prompt Engineering', instructor: 'Sophia W.', progress: 35 },
@@ -42,7 +24,7 @@ function getAuthHeaders() {
 
 async function readCourses() {
   try {
-    const response = await fetch(withApiBase('/api/v1/courses'));
+    const response = await fetch('/api/v1/courses');
     const data = await response.json();
     if (!response.ok) {
       setCrudMessage(data.error || 'Failed to fetch courses.', true);
@@ -52,7 +34,7 @@ async function readCourses() {
     setCrudMessage(`Read success: ${data.courses?.length || 0} courses loaded.`);
     return data.courses || [];
   } catch (error) {
-    setCrudMessage(`Read failed: backend unavailable${getApiBaseUrl() ? ` at ${getApiBaseUrl()}` : ''}.`, true);
+    setCrudMessage('Read failed: backend unavailable.', true);
     return [];
   }
 }
@@ -68,7 +50,7 @@ async function createCourse() {
   };
 
   try {
-    const response = await fetch(withApiBase('/api/v1/courses'), {
+    const response = await fetch('/api/v1/courses', {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(body)
@@ -81,7 +63,7 @@ async function createCourse() {
 
     setCrudMessage(`Create success: ${data.course?.title || 'course created'}.`);
   } catch (error) {
-    setCrudMessage(`Create failed: backend unavailable${getApiBaseUrl() ? ` at ${getApiBaseUrl()}` : ''}.`, true);
+    setCrudMessage('Create failed: backend unavailable.', true);
   }
 }
 
@@ -91,7 +73,7 @@ async function updateFirstCourse() {
 
   const first = courses[0];
   try {
-    const response = await fetch(withApiBase(`/api/v1/courses/${first._id}`), {
+    const response = await fetch(`/api/v1/courses/${first._id}`, {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify({ title: `${first.title} (Updated)` })
@@ -104,7 +86,7 @@ async function updateFirstCourse() {
 
     setCrudMessage(`Update success: ${data.course?.title || first.title}.`);
   } catch (error) {
-    setCrudMessage(`Update failed: backend unavailable${getApiBaseUrl() ? ` at ${getApiBaseUrl()}` : ''}.`, true);
+    setCrudMessage('Update failed: backend unavailable.', true);
   }
 }
 
@@ -117,7 +99,7 @@ async function deleteLastCourse() {
 
   const last = courses[courses.length - 1];
   try {
-    const response = await fetch(withApiBase(`/api/v1/courses/${last._id}`), {
+    const response = await fetch(`/api/v1/courses/${last._id}`, {
       method: 'DELETE',
       headers: getAuthHeaders()
     });
@@ -129,7 +111,7 @@ async function deleteLastCourse() {
 
     setCrudMessage(`Delete success: ${last.title}.`);
   } catch (error) {
-    setCrudMessage(`Delete failed: backend unavailable${getApiBaseUrl() ? ` at ${getApiBaseUrl()}` : ''}.`, true);
+    setCrudMessage('Delete failed: backend unavailable.', true);
   }
 }
 
