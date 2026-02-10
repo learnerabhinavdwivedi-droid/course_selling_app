@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="api-base-url" content="" />
+    <title>CourseFlow | Learn Without Limits</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <div class="logo">Course<span>Flow</span></div>
+      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav id="navMenu" class="nav-links">
+        <a href="#">Categories</a>
+        <a href="/dashboard.html">Dashboard</a>
+        <a href="#">Teach on CourseFlow</a>
+      </nav>
+      <div class="search-wrap">
+        <input id="courseSearch" type="text" placeholder="Search for anything" aria-label="Search courses" />
+      </div>
+      <div class="auth-actions">
+        <button id="switchLogin" class="ghost-btn">Log in</button>
+        <button id="switchSignup" class="solid-btn">Sign up</button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Upskill with job-ready courses from top instructors</h1>
+          <p>Build practical skills in web development, AI, cloud, and product design with guided learning paths.</p>
+          <button class="cta-btn">Start Learning Today</button>
+        </div>
+        <div class="auth-card">
+          <h3 id="authTitle">Create account</h3>
+          <form id="authForm" novalidate>
+            <input id="nameInput" type="text" placeholder="Full name" required />
+            <input id="emailInput" type="email" placeholder="Email" required />
+            <input id="passwordInput" type="password" minlength="6" placeholder="Password" required />
+            <select id="roleInput">
+              <option value="student">Student</option>
+              <option value="instructor">Instructor</option>
+              <option value="admin">Admin</option>
+            </select>
+            <button id="authSubmit" type="submit" class="solid-btn auth-submit">Sign up</button>
+          </form>
+          <p id="authMessage" class="api-message"></p>
+        </div>
+      </section>
+
+      <section class="marketplace">
+        <aside class="filters" id="filtersPanel">
+          <h3>Filters</h3>
+
+          <div class="filter-group">
+            <h4>Category</h4>
+            <label><input type="checkbox" value="Web Development" class="category-filter" /> Web Development</label>
+            <label><input type="checkbox" value="Data Science" class="category-filter" /> Data Science</label>
+            <label><input type="checkbox" value="Design" class="category-filter" /> Design</label>
+            <label><input type="checkbox" value="Business" class="category-filter" /> Business</label>
+          </div>
+
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label><input type="radio" name="rating" value="4.5" /> 4.5 & up</label>
+            <label><input type="radio" name="rating" value="4.0" /> 4.0 & up</label>
+            <label><input type="radio" name="rating" value="3.5" /> 3.5 & up</label>
+          </div>
+
+          <div class="filter-group">
+            <h4>Price</h4>
+            <label for="maxPrice">Max price: <span id="priceLabel">$120</span></label>
+            <input id="maxPrice" type="range" min="20" max="120" step="5" value="120" />
+          </div>
+        </aside>
+
+        <section class="course-area">
+          <div class="section-header">
+            <h2>Top Courses</h2>
+            <a href="/dashboard.html" class="text-link">Go to Enrolled Dashboard →</a>
+          </div>
+          <div id="courseGrid" class="course-grid"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>

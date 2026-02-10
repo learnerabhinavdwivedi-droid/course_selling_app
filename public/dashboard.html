@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="api-base-url" content="" />
+    <title>CourseFlow | My Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="top-nav compact">
+      <div class="logo">Course<span>Flow</span></div>
+      <nav class="nav-links desktop-only">
+        <a href="/index.html">Browse</a>
+        <a href="#">Wishlist</a>
+        <a href="#">Profile</a>
+      </nav>
+      <a href="/index.html" class="solid-btn link-btn">Explore More Courses</a>
+    </header>
+
+    <main class="page-shell">
+      <section class="dashboard-header">
+        <h1>Your Enrolled Courses</h1>
+        <p>Pick up where you left off and keep your momentum.</p>
+      </section>
+
+      <section class="crud-panel">
+        <h2>Course CRUD Testing Panel</h2>
+        <div class="crud-actions">
+          <button id="createCourseBtn" class="solid-btn">Create Course</button>
+          <button id="readCoursesBtn" class="ghost-btn">Read Courses</button>
+          <button id="updateCourseBtn" class="solid-btn">Update First Course</button>
+          <button id="deleteCourseBtn" class="ghost-btn danger">Delete Last Course</button>
+        </div>
+        <p id="crudMessage" class="api-message"></p>
+      </section>
+
+      <section id="enrolledGrid" class="enrolled-grid"></section>
+    </main>
+
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>
