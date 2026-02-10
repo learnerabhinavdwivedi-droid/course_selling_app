@@ -1,3 +1,14 @@
+function getApiBaseUrl() {
+  const metaValue = document.querySelector('meta[name="api-base-url"]')?.content?.trim();
+  const localValue = localStorage.getItem('apiBaseUrl')?.trim();
+  return metaValue || localValue || '';
+}
+
+function withApiBase(path) {
+  const base = getApiBaseUrl();
+  return `${base}${path}`;
+}
+
 const courses = [
   {
     title: 'The Complete Full-Stack Web Bootcamp',
@@ -114,7 +125,7 @@ async function submitAuth(event) {
     return;
   }
 
-  const endpoint = authMode === 'signup' ? '/api/v1/auth/signup' : '/api/v1/auth/login';
+  const endpoint = authMode === 'signup' ? withApiBase('/api/v1/auth/signup') : withApiBase('/api/v1/auth/login');
   const payload = authMode === 'signup' ? { name, email, password, role } : { email, password };
 
   try {
@@ -133,12 +144,16 @@ async function submitAuth(event) {
 
     if (data.token) {
       localStorage.setItem('authToken', data.token);
+      if (!localStorage.getItem('apiBaseUrl')) {
+        localStorage.setItem('apiBaseUrl', getApiBaseUrl());
+      }
       localStorage.setItem('authRole', data.user?.role || role || 'student');
     }
 
     setAuthMessage(`${authMode === 'signup' ? 'Signup' : 'Login'} successful. Token saved for API tests.`);
   } catch (error) {
-    setAuthMessage('Unable to reach backend API. Is the server running on port 3005?', true);
+    const suffix = getApiBaseUrl() ? ` at ${getApiBaseUrl()}` : '';
+    setAuthMessage(`Unable to reach backend API${suffix}. Check server status/CORS/API_BASE_URL.`, true);
   }
 }
 
