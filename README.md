@@ -101,12 +101,13 @@ npm run dev
 - Add optimistic UI for wishlist and progress updates.
 - In Next.js, use API routes or server actions to proxy sensitive calls.
 
-## Frontend (New)
+## Frontend (Udemy-inspired)
 
-A responsive recruiter-friendly frontend is included under `public/` with modular folders:
+A responsive, recruiter-friendly UI is included in `public/` with modular folders:
 
 ```bash
 public/
+  components/
   css/
   js/
   assets/
@@ -114,5 +115,18 @@ public/
   dashboard.html
 ```
 
-- Login page (`/index.html`) includes glowing input borders and clear validation errors.
-- Dashboard page (`/dashboard.html`) includes CRUD action buttons, playful cherry blossom stats panel, and sample PDF download generation.
+### Landing page (`/index.html`)
+- Sticky top navigation with logo, categories, search bar, and login/signup actions.
+- Hero section with bold headline, supporting copy, and CTA button.
+- Sidebar filters for category, ratings, and max price.
+- Dynamic course card grid with thumbnail, title, instructor, rating stars, and price.
+- Smooth hover transitions and subtle glowing focus borders for interactive elements.
+
+### Dashboard (`/dashboard.html`)
+- Enrolled courses view with progress bars and **Continue Learning** actions.
+- Responsive card layout that stacks on mobile.
+
+### Design system
+- Professional white/gray base palette with purple accents.
+- Consistent modern typography and spacing.
+- Mobile responsiveness with collapsible navigation menu and stacked layouts.

@@ -3,48 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CourseFlow | Dashboard</title>
+    <title>CourseFlow | My Dashboard</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-  <body class="dashboard-body">
-    <header class="hero">
-      <h1>Recruiter-Friendly Product Dashboard</h1>
-      <p>Modern UI, actionable controls, and polished interactions.</p>
+  <body>
+    <header class="top-nav compact">
+      <div class="logo">Course<span>Flow</span></div>
+      <nav class="nav-links desktop-only">
+        <a href="/index.html">Browse</a>
+        <a href="#">Wishlist</a>
+        <a href="#">Profile</a>
+      </nav>
+      <a href="/index.html" class="solid-btn link-btn">Explore More Courses</a>
     </header>
 
-    <main class="dashboard-main">
-      <section class="crud-section">
-        <h2>Course CRUD Actions</h2>
-        <div class="crud-grid">
-          <button class="crud-btn create">Create</button>
-          <button class="crud-btn read">Read</button>
-          <button class="crud-btn update">Update</button>
-          <button class="crud-btn delete">Delete</button>
-        </div>
+    <main class="page-shell">
+      <section class="dashboard-header">
+        <h1>Your Enrolled Courses</h1>
+        <p>Pick up where you left off and keep your momentum.</p>
       </section>
 
-      <section class="stats-section">
-        <h2>Performance Snapshot</h2>
-        <div class="stats-grid">
-          <article class="stat-card">
-            <p>Total Courses</p>
-            <h3>128</h3>
-          </article>
-          <article class="stat-card">
-            <p>Active Students</p>
-            <h3>2,451</h3>
-          </article>
-          <article class="stat-card">
-            <p>Avg Completion</p>
-            <h3>74%</h3>
-          </article>
-        </div>
-      </section>
-
-      <section class="pdf-section">
-        <button id="downloadPdfBtn" class="btn-primary">Generate & Download Sample PDF</button>
-        <p id="pdfMessage" class="helper-text"></p>
-      </section>
+      <section id="enrolledGrid" class="enrolled-grid"></section>
     </main>
 
     <script src="/js/dashboard.js"></script>

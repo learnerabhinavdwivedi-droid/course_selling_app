@@ -3,28 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CourseFlow | Login</title>
+    <title>CourseFlow | Learn Without Limits</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-  <body class="login-body">
-    <main class="login-wrapper">
-      <section class="login-card">
-        <h1>Welcome Back</h1>
-        <p class="subtitle">Sign in to access your learning dashboard.</p>
+  <body>
+    <header class="top-nav">
+      <div class="logo">Course<span>Flow</span></div>
+      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav id="navMenu" class="nav-links">
+        <a href="#">Categories</a>
+        <a href="#">My Learning</a>
+        <a href="#">Teach on CourseFlow</a>
+      </nav>
+      <div class="search-wrap">
+        <input type="text" placeholder="Search for anything" aria-label="Search courses" />
+      </div>
+      <div class="auth-actions">
+        <button class="ghost-btn">Log in</button>
+        <button class="solid-btn">Sign up</button>
+      </div>
+    </header>
 
-        <form id="loginForm" novalidate>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+    <main class="page-shell">
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Upskill with job-ready courses from top instructors</h1>
+          <p>Build practical skills in web development, AI, cloud, and product design with guided learning paths.</p>
+          <button class="cta-btn">Start Learning Today</button>
+        </div>
+      </section>
 
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="••••••••" minlength="6" required />
+      <section class="marketplace">
+        <aside class="filters" id="filtersPanel">
+          <h3>Filters</h3>
 
-          <p id="formError" class="error-message" aria-live="polite"></p>
-          <button type="submit" class="btn-primary">Login</button>
-        </form>
+          <div class="filter-group">
+            <h4>Category</h4>
+            <label><input type="checkbox" value="Web Development" class="category-filter" /> Web Development</label>
+            <label><input type="checkbox" value="Data Science" class="category-filter" /> Data Science</label>
+            <label><input type="checkbox" value="Design" class="category-filter" /> Design</label>
+            <label><input type="checkbox" value="Business" class="category-filter" /> Business</label>
+          </div>
+
+          <div class="filter-group">
+            <h4>Rating</h4>
+            <label><input type="radio" name="rating" value="4.5" /> 4.5 & up</label>
+            <label><input type="radio" name="rating" value="4.0" /> 4.0 & up</label>
+            <label><input type="radio" name="rating" value="3.5" /> 3.5 & up</label>
+          </div>
+
+          <div class="filter-group">
+            <h4>Price</h4>
+            <label for="maxPrice">Max price: <span id="priceLabel">$120</span></label>
+            <input id="maxPrice" type="range" min="20" max="120" step="5" value="120" />
+          </div>
+        </aside>
+
+        <section class="course-area">
+          <div class="section-header">
+            <h2>Top Courses</h2>
+            <a href="/dashboard.html" class="text-link">Go to Enrolled Dashboard →</a>
+          </div>
+          <div id="courseGrid" class="course-grid"></div>
+        </section>
       </section>
     </main>
 
-    <script src="/js/login.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>
