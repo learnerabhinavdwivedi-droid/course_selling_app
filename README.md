@@ -132,3 +132,18 @@ public/
 - Professional white/gray base palette with purple accents.
 - Consistent modern typography and spacing.
 - Mobile responsiveness with collapsible navigation menu and stacked layouts.
+
+
+## Vercel deployment notes
+
+- Serverless handlers are provided in `api/index.js` and `api/[...all].js` to route `/api/*` requests into the Express app.
+- `vercel.json` uses function settings only (no pinned runtime string), avoiding runtime-version validation errors.
+- Database initialization is cached and no longer re-connects per invocation.
+- Use `/healthz` to verify function health after deployment.
+- Ensure `MONGO_URI` and `JWT_SECRET` are set in Vercel project environment variables.
+
+
+### Database connection
+- Default local fallback URI is `mongodb://127.0.0.1:27017/course_selling` when `MONGO_URI` is not set.
+- For production/Vercel, set `MONGO_URI` to a MongoDB Atlas connection string in Project Settings → Environment Variables.
+- Health check endpoint: `GET /healthz` now returns DB connectivity status.

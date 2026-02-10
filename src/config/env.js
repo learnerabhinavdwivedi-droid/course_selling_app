@@ -4,6 +4,7 @@ dotenv.config();
 
 module.exports = {
   PORT: process.env.PORT || 3005,
+  MONGO_URI: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/course_selling',
   MONGO_URI: process.env.MONGO_URI,
   JWT_SECRET: process.env.JWT_SECRET || 'dev-secret',
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '1d',

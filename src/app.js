@@ -11,6 +11,7 @@ const enrollmentRoutes = require('./routes/enrollment.routes');
 const paymentRoutes = require('./routes/payment.routes');
 
 const path = require('path');
+const connectDB = require('./config/db');
 
 const app = express();
 
@@ -18,6 +19,15 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+app.get('/healthz', async (req, res) => {
+  const dbState = connectDB.getDBState();
+  const statusCode = dbState.status === 'connected' ? 200 : 503;
+
+  return res.status(statusCode).json({
+    status: statusCode === 200 ? 'ok' : 'degraded',
+    db: dbState
+  });
+});
 app.get('/', (req, res) => res.send('Welcome to the Udemy-like Course Selling API'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
