@@ -118,7 +118,8 @@ async function submitAuth(event) {
   const payload = authMode === 'signup' ? { name, email, password, role } : { email, password };
 
   try {
-    const response = await fetch(endpoint, {
+    const API_BASE_URL = window.location.origin;
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
